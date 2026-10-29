@@ -11,10 +11,10 @@ data_path: /imdb_data/
 
 
 #out_out
-checkpoint_path: './out
+checkpoint_path: './out'
 # checkpoint_path: '/kaggle/working/outputs'
 model_name: 'lstm.pth'
 
 #log_path
-log_path: './out
+log_path: './out'
 # log_path: '/kaggle/working/outputs'
