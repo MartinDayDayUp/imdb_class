@@ -18,7 +18,7 @@ max_vocab = config.max_vocab
 
 check_path = config.checkpoint_path
 data_dir = config.data_path
-
+model_name = config.model_name
 
 
 
@@ -151,13 +151,13 @@ def run_train():
         'val_result':val_result,
         'state_dict':lstmModel.state_dict()
     }
-    torch.save(save_check_point,check_path)
-    plot_and_save(train_result, val_result, './out/curve.png')
+    torch.save(save_check_point,os.path.join(check_path,model_name))
+    plot_and_save(train_result, val_result, os.path.join(check_path,'curve.png'))
 
 
 def run_test():
 
-    if os.path.exists(check_path):
+    if os.path.exists(ps.path.join(check_path,model_name)):
         print('no model load')
         return
     check_obj = torch.load(check_path)
