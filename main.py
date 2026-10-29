@@ -38,8 +38,8 @@ else:
         "stanfordnlp/imdb", 
         cache_dir="./imdb_data"
     )
-    train_data = tmp_dataset['train']
-    val_data = tmp_dataset['test']
+    train_dataset = tmp_dataset['train']
+    val_dataset = tmp_dataset['test']
 
 
 
