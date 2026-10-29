@@ -160,7 +160,7 @@ def run_test():
     if not os.path.exists(os.path.join(check_path,model_name)):
         print('no model load')
         return
-    check_obj = torch.load(check_path)
+    check_obj = torch.load(os.path.join(check_path,model_name))
     lstmModel = getModel(max_vocab).to(device)
     lstmModel.load_state_dict(check_obj['state_dict'])
 
