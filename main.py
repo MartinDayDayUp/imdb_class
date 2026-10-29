@@ -60,7 +60,7 @@ text = [idx2word.get(id,'1') for id in idxs.numpy()]
 # print(idxs,label)
 
 train_ld = DataLoader(train_data,batch_size =batch_size,shuffle=True)
-val_ld = DataLoader(train_data,batch_size =batch_size,shuffle=False)
+val_ld = DataLoader(val_data,batch_size =batch_size,shuffle=False)
 
 # idxs,lengths,labels = next(iter(train_ld))
 # embedding = nn.Embedding(max_vocab,300,padding_idx=0)
