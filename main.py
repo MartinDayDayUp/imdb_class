@@ -166,15 +166,16 @@ def run_test():
 
 
     test_list = []
-    test_list.append('i love this movie it is very good')
-    test_list.append('Absolutely brilliant from start to finish. The acting was superb and the story kept me on the edge of my seat. Highly recommended!')
+
     test_list.append('i hate this movie')
     test_list.append('Boring, predictable, and way too long. I checked my watch at least five times. Save your money.')
+    test_list.append('i love this movie it is very good')
+    test_list.append('Absolutely brilliant from start to finish. The acting was superb and the story kept me on the edge of my seat. Highly recommended!')
     test_label = []
-    test_label.append(1)
-    test_label.append(1)
     test_label.append(0)
     test_label.append(0)
+    test_label.append(1)
+    test_label.append(1)
 
 
     test_dict = {'text':test_list,
