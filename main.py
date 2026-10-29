@@ -157,7 +157,7 @@ def run_train():
 
 def run_test():
 
-    if os.path.exists(ps.path.join(check_path,model_name)):
+    if os.path.exists(os.path.join(check_path,model_name)):
         print('no model load')
         return
     check_obj = torch.load(check_path)
