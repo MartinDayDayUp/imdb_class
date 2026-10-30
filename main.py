@@ -76,7 +76,7 @@ glove = api.load("glove-wiki-gigaword-300")
 print(glove["good"].shape)
 print(glove.most_similar("good", topn=5))
 
-embedding_matrix = getPreEmbedding(glove,word2idx)
+embedding_matrix,_ = getPreEmbedding(glove,word2idx)
 
 embedding_matrix = torch.tensor(embedding_matrix)
 
