@@ -78,7 +78,7 @@ print(glove.most_similar("good", topn=5))
 
 embedding_matrix = getPreEmbedding(glove,word2idx)
 
-
+embedding_matrix = torch.tensor(embedding_matrix)
 
 def train_oneEp(model,criterion,optimizer):
     model.train()
