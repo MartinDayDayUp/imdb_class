@@ -9,10 +9,12 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch
 class getModel(nn.Module):
-    def __init__(self,max_vocab,embbing_size=256,hidden_len=256):
+    def __init__(self,max_vocab,embed_mat,embbing_size=300,hidden_len=256):
         super(getModel,self).__init__()
 
-        self.embedding = nn.Embedding(max_vocab,embbing_size,padding_idx=0)#词表目前 
+        # self.embedding = nn.Embedding(max_vocab,embbing_size,padding_idx=0)#词表目前 
+
+        self.embedding = nn.Embedding.from_pretrained(embed_mat,freeze=False,padding_idx=0)
         #可以这么理解，词矩阵维度是max_vocab * embbing_size 词向量矩阵 在idx=0 代表“pad词”（占位），这个位置的向量不更新，永远为0
         #idx= 1 代表 “unk"词，这个在定义词表的时候已经确定好了
         self.lstm = nn.LSTM(embbing_size,hidden_len,num_layers=1,batch_first=True,bidirectional=True)

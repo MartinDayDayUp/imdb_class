@@ -3,7 +3,7 @@ from torch.utils.data import Dataset
 import torch
 import re                                          # 正则表达式，用来清洗文本中的标点
 from collections import Counter
-
+import numpy as np
 
 def tokenize(text):
     text = text.lower()
@@ -32,6 +32,23 @@ def build_vocab(texts,min_freq=2,max_vocab = 30000):
             idx2word[idx] = word
 
     return word2idx,idx2word
+
+
+def getPreEmbedding(glove,word2idx,embedding_dim = 300):
+    embedding_matrix = np.random.normal(
+        0, 0.1,
+        (len(word2idx), embedding_dim)
+    ).astype(np.float32)
+    embedding_matrix[0] = 0
+    matched = 0
+    for word,idx in word2idx.item():
+        if word in glove:
+            embedding_matrix[idx] = glove[word]
+            matched+=1
+    print(f"匹配词数: {matched}/{len(word2idx)}")
+
+
+    return embedding_matrix,matched
 
 
 

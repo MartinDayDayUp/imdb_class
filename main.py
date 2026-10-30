@@ -1,6 +1,6 @@
 
 from datasets import Dataset,load_dataset
-from getDataSet import getDataSet,build_vocab
+from getDataSet import getDataSet,build_vocab,getPreEmbedding
 from torch.utils.data import DataLoader
 import torch.nn as nn
 from getModel import getModel
@@ -9,6 +9,8 @@ from disp import plot_and_save
 from init_config import getConfig
 
 import os
+
+import gensim.downloader as api
 
 
 config = getConfig('./config.yaml')
@@ -67,7 +69,14 @@ val_ld = DataLoader(val_data,batch_size =batch_size,shuffle=False)
 
 # embedding.weight.shape()
 # x = embedding(idxs)
+# 自动下载并加载 300 维 GloVe
 
+glove = api.load("glove-wiki-gigaword-300")
+
+print(glove["good"].shape)
+print(glove.most_similar("good", topn=5))
+
+embedding_matrix = getPreEmbedding(glove,word2idx)
 
 
 
@@ -123,7 +132,7 @@ def val_oneEp(model,criterion):
 
 
 def run_train():
-    lstmModel = getModel(max_vocab).to(device)
+    lstmModel = getModel(max_vocab,embedding_matrix).to(device)
 
     criterion = nn.CrossEntropyLoss()                  # 交叉熵损失，适合分类任务
     optimizer = torch.optim.Adam(lstmModel.parameters(), lr=1e-4)  
@@ -161,7 +170,7 @@ def run_test():
         print('no model load')
         return
     check_obj = torch.load(os.path.join(check_path,model_name))
-    lstmModel = getModel(max_vocab).to(device)
+    lstmModel = getModel(max_vocab,embedding_matrix).to(device)
     lstmModel.load_state_dict(check_obj['state_dict'])
 
 
