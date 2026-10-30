@@ -41,7 +41,7 @@ def getPreEmbedding(glove,word2idx,embedding_dim = 300):
     ).astype(np.float32)
     embedding_matrix[0] = 0
     matched = 0
-    for word,idx in word2idx.item():
+    for word,idx in word2idx.items():
         if word in glove:
             embedding_matrix[idx] = glove[word]
             matched+=1
