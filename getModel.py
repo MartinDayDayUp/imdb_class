@@ -17,8 +17,10 @@ class getModel(nn.Module):
         #idx= 1 代表 “unk"词，这个在定义词表的时候已经确定好了
         self.lstm = nn.LSTM(embbing_size,hidden_len,num_layers=1,batch_first=True,bidirectional=True)
 
+        self.dropout1 = nn.Dropout(0.2)
         self.fc1 = nn.Linear(hidden_len*2,128)
 
+        self.dropout2 = nn.Dropout(0.2)
         self.fc2 = nn.Linear(128,64)
 
         self.fc3 = nn.Linear(64,2)
@@ -34,7 +36,11 @@ class getModel(nn.Module):
 
         x = torch.cat([h[-1],h[-2]],dim=1)#batch_size hidden_size*2
 
+        x = self.dropout1(x)
+
         x = F.relu(self.fc1(x))
+
+        x = self.dropout2(x)#dropout 加在相对神经元较多的位置来降低过拟合  下面的层只有64层输出就不加了
 
         x = F.relu(self.fc2(x))
 
